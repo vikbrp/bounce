@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Gamedev Canvas Workshop</title>
+    <style>
+    	* { padding: 0; margin: 0; }
+    	canvas { background: #eee; display: block; margin: 0 auto; }
+    </style>
+</head>
+<body>
+
+<canvas id="myCanvas" width="480" height="320"></canvas>
+
+<script>
+ 	var canvas = document.getElementById("myCanvas");
+ var ctx = canvas.getContext("2d");
+
+//set the height and width of canvas
+var x = canvas.width/2;
+var y = canvas.height-30;
+//define the change in position of x and y axis
+var dx=2;
+var dy=-2;
+//hold radius of drawn circle
+var ballRadius=10;
+//drawing the ball
+function drawBall(){
+  ctx.beginPath();
+ctx.arc(x, y, 10, 0, Math.PI*2);
+ctx.fillStyle = "#0095DD";
+ctx.fill();
+ctx.closePath();
+
+ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+}
+
+function draw(){
+  //clearin the path it already covered
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawBall();
+  //adding the differnce to the x and y axis to move
+  x+=dx;
+  y+=dy;
+
+//let bounce the ball when reach touch the extreme end side of the wall
+ if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+    dx = -dx;
+}
+if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
+    dy = -dy;
+}
+
+}
+//draw method will be called after every 10 milli seconds
+setInterval(draw,10);
+
+
+
+</script>
+
+</body>
+</html>
