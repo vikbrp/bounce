@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/vikbrp/bounce/issues"
   },
-  "homepage": "https://github.com/vikbrp/bounce#readme"
+  "homepage": "https://github.com/vikbrp/bounce#readme" ,
   
   "engines": {
     "node": "10.x"
