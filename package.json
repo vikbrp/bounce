@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vikbrp/bounce-game.git"
+    "url": "git+https://github.com/vikbrp/bounce.git"
   },
   "author": "komal",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vikbrp/bounce-game/issues"
+    "url": "https://github.com/vikbrp/bounce/issues"
   },
-  "homepage": "https://github.com/vikbrp/bounce-game#readme"
+  "homepage": "https://github.com/vikbrp/bounce#readme"
 }
 "engines": {
     "node": "10.x"
