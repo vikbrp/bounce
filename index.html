@@ -41,6 +41,9 @@ var brickPadding = 10;
 var brickOffsetTop = 30;
 var brickOffsetLeft = 30;
 
+//defining the lives
+var lives = 3;
+
 //adding score
 var score = 0;
 
@@ -98,9 +101,9 @@ function collisionDetection() {
                 b.status = 0;
                 score++;
                 if(score == brickColumnCount*brickRowCount){
-                  alert("Congratulations! You Win, Your score is"+score);
+                  alert("Congratulations! You Win, Your score is "+score);
                       document.location.reload();
-		                   clearInterval(interval);
+		                   
                 }
             }
             }
@@ -112,6 +115,13 @@ function drawScore() {
     ctx.font = "16px Arial";
     ctx.fillStyle = "#0095DD";
     ctx.fillText("Score: "+score, 8, 20);
+}
+
+//draw lives
+function drawLives() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Lives: "+lives, canvas.width-65, 20);
 }
 
 
@@ -160,6 +170,7 @@ function draw(){
   drawPaddle();
   drawScore();
   drawBricks();
+  drawLives();
   collisionDetection();
   //adding the differnce to the x and y axis to move
   
@@ -176,10 +187,20 @@ if(y + dy < ballRadius) {
         dy = -dy;
     }
     else {
-        alert("GAME OVER");
+      lives--;
+      if(!lives){
+        alert("GAME OVER, Your Score is "+score);
         document.location.reload();
-		clearInterval(interval);
+    
+      }else{
+        x = canvas.width/2;
+    y = canvas.height-30;
+    dx = 2;
+    dy = -2;
+    paddleX = (canvas.width-paddleWidth)/2;
+      }
     }
+    
 }
 
 //let move the paddle to 7 pixels right and left
@@ -194,18 +215,12 @@ else if(leftPressed && paddleX > 0) {
 
 x+=dx;
   y+=dy;
+  requestAnimationFrame(draw);
 
 }
 
-
-
-
-
 //draw method will be called after every 10 milli seconds
-var interval = setInterval(draw,10);
-
-
-
+draw();
 </script>
 
 </body>
