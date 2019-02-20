@@ -42,14 +42,36 @@ var brickOffsetTop = 30;
 var brickOffsetLeft = 30;
 
 var bricks = [];
-console.log("1------"+bricks);
-console.log("2------"+brickColumnCount);
-console.log("3------"+brickRowCount);
+//console.log("1------"+bricks);
+//console.log("2------"+brickColumnCount);
+//console.log("3------"+brickRowCount);
 for(var c=0; c<brickColumnCount; c++) {
     bricks[c] = [];
     for(var r=0; r<brickRowCount; r++) {
         bricks[c][r] = { x: 0, y: 0 };
-        console.log("4------"+bricks[c][r]);
+        //console.log("4------"+bricks[c][r]);
+    }
+}
+
+//event listener for key up and key down
+document.addEventListener("keydown",keyDownHandler, false);
+document.addEventListener("keyup",keyUpHandler, false);
+//keyhandler function for down key pressed
+function keyDownHandler(e) {
+    if(e.key == "Right" || e.key == "ArrowRight") {
+        rightPressed = true;
+    }
+    else if(e.key == "Left" || e.key == "ArrowLeft") {
+        leftPressed = true;
+    }
+}
+//keyhandler function for up key pressed
+function keyUpHandler(e) {
+    if(e.key == "Right" || e.key == "ArrowRight") {
+        rightPressed = false;
+    }
+    else if(e.key == "Left" || e.key == "ArrowLeft") {
+        leftPressed = false;
     }
 }
 
@@ -57,12 +79,12 @@ for(var c=0; c<brickColumnCount; c++) {
 //drawing the ball
 function drawBall(){
   ctx.beginPath();
-ctx.arc(x, y, 10, 0, Math.PI*2);
+ctx.arc(x, y, ballRadius, 0, Math.PI*2);
 ctx.fillStyle = "#0095DD";
 ctx.fill();
 ctx.closePath();
 
-ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+//ctx.arc(x, y, ballRadius, 0, Math.PI*2);
 }
 //drawing a paddle
 function drawPaddle(){
@@ -95,7 +117,7 @@ function draw(){
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBall();
   drawPaddle();
-  //drawBricks();
+  drawBricks();
   //adding the differnce to the x and y axis to move
   
 
@@ -113,7 +135,7 @@ if(y + dy < ballRadius) {
     else {
         alert("GAME OVER");
         document.location.reload();
-        clearInterval(interval);
+		clearInterval(interval);
     }
 }
 
@@ -131,27 +153,7 @@ x+=dx;
   y+=dy;
 
 }
-//event listener for key up and key down
-document.addEventListener("keydown",keyDownHandler, false);
-document.addEventListener("keyup",keyUpHandler, false);
-//keyhandler function for down key pressed
-function keyDownHandler(e) {
-    if(e.key == "Right" || e.key == "ArrowRight") {
-        rightPressed = true;
-    }
-    else if(e.key == "Left" || e.key == "ArrowLeft") {
-        leftPressed = true;
-    }
-}
-//keyhandler function for up key pressed
-function keyUpHandler(e) {
-    if(e.key == "Right" || e.key == "ArrowRight") {
-        rightPressed = false;
-    }
-    else if(e.key == "Left" || e.key == "ArrowLeft") {
-        leftPressed = false;
-    }
-}
+
 
 //paddle and brick collission
 function collisionDetection() {
